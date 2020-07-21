@@ -83,9 +83,6 @@ def main():
     x2 = 62
     y2 = 332
 
-    print("Printing gbp list: ")
-    print(gbpList)
-    print("Printing inr list: ")
     x = int(inrList[0][0][2])
     y = inrList[0][1]
     prev = [(60),(330)]
@@ -106,7 +103,6 @@ def main():
 
     prev = [60,650]
     for i in gbpList:
-        print(i)
         y = i[1]
         x = (int(i[0][2]))
         curr = [60+(30*x),(660-(6000*(y-0.86)))]
@@ -114,8 +110,10 @@ def main():
         w.create_line(prev[0],prev[1],curr[0],curr[1])
         prev[0] = curr[0]
         prev[1] = curr[1]
-    Label(master,text="Graph for INR").place(x=950,y=30)
-    Label(master,text="Graph for GBP")
+    Label(master,text="Graph for INR").place(x=950,y=100)
+    Label(master,text="Graph for GBP").place(x=950,y=450)
+    Label(master,text="Exchange Rate with respect to EUR").place(x=50,y=50)
+
 
 if __name__=="__main__":
     main()

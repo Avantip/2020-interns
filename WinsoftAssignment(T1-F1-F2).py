@@ -23,75 +23,54 @@ def main():
         
     master = Tk()
     master.geometry("1400x800")
+    Label(master,text="Exchange Rate with respect to EUR").place(x=50,y=50)
 
     #Dynamic Date Selection
-
-    label_start_date=Label(master,text="From")
-    label_start_date.place(x=200,y=50)
-
-    label1=Label(master,text="Day")
-    label2=Label(master,text="Month")
-    label3=Label(master,text="Year")
-
-    label1.place(x=300,y=30)
-    label2.place(x=400,y=30)
-    label3.place(x=500,y=30)
-
-    listbox1=Listbox(master,height=1, width=10)
-    listbox2=Listbox(master,height=1, width=10)
-    listbox3=Listbox(master,height=1, width=10)
     
-    listbox1.place(x=300,y=50)
-    listbox2.place(x=400,y=50)
-    listbox3.place(x=500,y=50)
-    
-    for i in range(1,32,1):
-        listbox1.insert(i,i)
 
-    for i in range(1,13,1):
-        listbox2.insert(i,i)
-    
-    listbox3.insert(1,"2018")
-    listbox3.insert(2,"2019")
+    start_date=['2019','01','01']
+    end_date=['2019','01','31']
+    '''
+    print("Enter the range of data dynamically")
+    print("Enter the start_date:")
 
-    label_end_date=Label(master,text="To")
-    label_end_date.place(x=200,y=100)
+    day=input("Enter Day:")
+    month=input("Enter Month:")
+    year=input("Enter Year:")
 
-    listbox4=Listbox(master,height=1, width=10)
-    listbox5=Listbox(master,height=1, width=10)
-    listbox6=Listbox(master,height=1, width=10)
-    
-    listbox4.place(x=300,y=100)
-    listbox5.place(x=400,y=100)
-    listbox6.place(x=500,y=100)
-    
-    for i in range(1,32,1):
-        listbox4.insert(i,i)
+    start_date.append(year)
+    start_date.append(month)
+    start_date.append(day)
 
-    for i in range(1,13,1):
-        listbox5.insert(i,i)
-    
-    listbox6.insert(1,"2018")
-    listbox6.insert(2,"2019")
+    print("Enter the range of data dynamically")
+    print("Enter the start_date:")
 
+    day=input("Enter Day:")
+    month=input("Enter Month:")
+    year=input("Enter Year:")
+
+    end_date.append(year)
+    end_date.append(month)
+    end_date.append(day)
+
+    '''
     #Currency
 
     currency_list=[]
     for i in data['rates']['2019-01-30']:
         currency_list.append(i)
-        
-    label4=Label(master,text="Currency")
-    label4.place(x=200,y=150)    
-    listbox7=Listbox(master,height=1, width=10)
-    listbox7.place(x=300,y=150)
-
+    print(currency_list)
+    cur=input("Enter currency from the above list:")
+    cur.upper()
+    
+    
     #Creating Canvas to plot graphs
     
-    canvas_width = 1100
+    canvas_width = 1000
     canvas_height = 400
     w = Canvas(master, width=canvas_width, height=canvas_height)
     
-    w.place(x=200,y=200)
+    w.place(x=100,y=100)
 
     #drawing grid
 
@@ -101,11 +80,15 @@ def main():
 
     w.create_line(60,0,60,390)
     w.create_line(30, 360, 1000, 360)
+    w.create_line(60,337,70,340)
+    w.create_line(70,340,50,345)
+    w.create_line(50,345,65,350)
+    w.create_line(65,350,60,355)
 
     #plotting X-Axis
     
-    i=250
-    j=570
+    i=150
+    j=470
 
     for a in range(32):
         Label(master,text=a).place(x=i,y=j)
@@ -115,22 +98,25 @@ def main():
         
     a=78
     while a<=82:
-        Label(master,text=a).place(x=220,y=j-50)
+        Label(master,text=a).place(x=130,y=j-50)
         j=j-30
         a=a+0.5
 
-    inrList = []
-    tmp = []
+    cur_list = []
+    tmp_date = []
     d = []
     
     for i in data['rates']:
         d = (i.split('-'))
-        if d[1] == '01':
-            tmp.append(d)
-            tmp.append(data['rates'][i]['INR'])
-            inrList.append(tmp)
-            tmp = []
-    inrList.sort(key = sortDay)
+        if d[1]==start_date[1]:
+            if d[2]>=start_date[2] and d[2]<=end_date[2]:
+                tmp_date.append(d)
+                tmp_date.append(data['rates'][i][cur])
+                cur_list.append(tmp_date)
+                tmp_date = []
+    print(tmp_date)
+                
+    cur_list.sort(key = sortDay)
 
     w.create_rectangle(58, 328, 62, 332,outline="#f11", fill="#1f1", width=1)
     x1 = 58
@@ -138,10 +124,10 @@ def main():
     x2 = 62
     y2 = 332
 
-    x = int(inrList[0][0][2])
-    y = inrList[0][1]
+    x = int(cur_list[0][0][2])
+    y = cur_list[0][1]
     prev = [(60),(330)]
-    for i in inrList:
+    for i in cur_list:
         y = i[1]
         x = (int(i[0][2]))
         curr = [60+(30*x),(330-(60*(y-78)))]

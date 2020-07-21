@@ -109,12 +109,12 @@ def main():
     for i in data['rates']:
         d = (i.split('-'))
         if d[1]==start_date[1]:
-            if d[2]>=start_date[2] and d[2]<=end_date[2]:
+            if d[2]>=start_date[2] or d[2]<=end_date[2]:
                 tmp_date.append(d)
                 tmp_date.append(data['rates'][i][cur])
                 cur_list.append(tmp_date)
                 tmp_date = []
-    print(tmp_date)
+    print(cur_list)
                 
     cur_list.sort(key = sortDay)
 

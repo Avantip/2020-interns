@@ -26,11 +26,11 @@ def main():
     Label(master,text="Exchange Rate with respect to EUR").place(x=50,y=50)
     
 
-    start_date=['2019','01','01']
-    end_date=['2019','01','31']
+    start_date=[]
+    end_date=[]
 
     #Dynamic Date Selection
-    '''
+    
     print("Enter the range of data dynamically")
     print("Enter the start_date:")
 
@@ -53,7 +53,6 @@ def main():
     end_date.append(month)
     end_date.append(day)
 
-    '''
     #Currency
 
     currency_list=[]
@@ -114,6 +113,7 @@ def main():
                 tmp_date.append(data['rates'][i][cur])
                 cur_list.append(tmp_date)
                 tmp_date = []
+
     print(cur_list)
                 
     cur_list.sort(key = sortDay)

@@ -24,12 +24,12 @@ def main():
     master = Tk()
     master.geometry("1400x800")
     Label(master,text="Exchange Rate with respect to EUR").place(x=50,y=50)
-
-    #Dynamic Date Selection
     
 
     start_date=['2019','01','01']
     end_date=['2019','01','31']
+
+    #Dynamic Date Selection
     '''
     print("Enter the range of data dynamically")
     print("Enter the start_date:")
@@ -69,12 +69,12 @@ def main():
     canvas_width = 1000
     canvas_height = 400
     w = Canvas(master, width=canvas_width, height=canvas_height)
-    
+    interval=30
     w.place(x=100,y=100)
 
     #drawing grid
 
-    checkered(w,30,canvas_width,canvas_height)
+    checkered(w,interval,canvas_width,canvas_height)
 
     #drawing X-axis and Y-axis
 
@@ -118,15 +118,17 @@ def main():
                 
     cur_list.sort(key = sortDay)
 
-    w.create_rectangle(58, 328, 62, 332,outline="#f11", fill="#1f1", width=1)
     x1 = 58
     y1 = 328
     x2 = 62
     y2 = 332
 
+    w.create_rectangle(x1, y1, x2, y2,outline="#f11", fill="#1f1", width=1)
+    
+
     x = int(cur_list[0][0][2])
     y = cur_list[0][1]
-    prev = [(60),(330)]
+    prev = [(x1-2),(y2-2)]
     for i in cur_list:
         y = i[1]
         x = (int(i[0][2]))

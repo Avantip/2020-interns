@@ -1,3 +1,5 @@
+
+
 #importing files
 
 from tkinter import *
@@ -26,6 +28,7 @@ def main():
     inrList = []
     tmp = []
     d = []
+    
     for i in data['rates']:
         d = (i.split('-'))
         if d[1] == '01':
@@ -37,8 +40,9 @@ def main():
             tmp.append(data['rates'][i]['GBP'])
             gbpList.append(tmp)
             tmp = []
-
+            
     #sorting the inr and gbp lists based on dates in january month       
+
     inrList.sort(key = sortDay)
     gbpList.sort(key = sortDay)
 
@@ -46,6 +50,7 @@ def main():
     master.geometry("1400x800") 
     canvas_width = 1100
     canvas_height = 1000
+    interval=30
     w = Canvas(master, width=canvas_width, height=canvas_height)
     w.place(x=50,y=50)
 
@@ -114,6 +119,6 @@ def main():
     Label(master,text="Graph for GBP").place(x=950,y=450)
     Label(master,text="Exchange Rate with respect to EUR").place(x=50,y=50)
 
-
+    print(inrList)
 if __name__=="__main__":
     main()

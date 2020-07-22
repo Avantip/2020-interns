@@ -146,8 +146,10 @@ def main():
     w.create_rectangle(58, 688-(3000*(y-0.79)), 62, 692-(3000*(y-0.79)),outline="#f11", fill="#1f1", width=1)
     w.create_line(60,690-(3000*(y-0.79)),60*31,690-(3000*(y-0.79)),fill = "#f11", width = 2)
 
-
-    
+    Label(master,text="Graph for INR").place(x=900,y=30)
+    Label(master,text="Graph for GBP").place(x=900,y=520)
+    Label(master,text="Current Rate for INR").place(x=150,y=230)
+    Label(master,text="Current rate for GBP").place(x=150,y=660)
 
     
 
